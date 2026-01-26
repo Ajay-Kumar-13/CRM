@@ -1,9 +1,9 @@
-import './App.css';
+import Navbar from "./modules/components/Navbar";
 
 function App() {
   return (
     <div className="App">
-      Welcome to CRM
+      <Navbar />
     </div>
   );
 }
