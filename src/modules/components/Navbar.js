@@ -19,12 +19,16 @@ function Navbar() {
     }
 
     const updateMenu = () => {
+        document.getElementById("sideBarToogle").setAttribute("aria-expanded", "false");
         if(isHamburgerMenuOpen) {
             document.getElementById("btnOpen").setAttribute("aria-expanded", "false");
-            setHamburgerMenuStatus(false)
+            setHamburgerMenuStatus(false);
+            document.getElementById("sideBarToogle").style.removeProperty("z-index");
+
         } else {
             document.getElementById("btnOpen").setAttribute("aria-expanded", "true");
             setHamburgerMenuStatus(true)
+            document.getElementById("sideBarToogle").style.zIndex = "-1";
         }
     }
 
