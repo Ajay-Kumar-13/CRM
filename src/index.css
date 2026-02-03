@@ -40,6 +40,12 @@
     font-size: var(--fs-18);
   }
 
+  h3 {
+    font-family: 'Rubik';
+    font-size: var(--fs-15);
+    margin: 0;
+  }
+
   h1 {
     font-family: 'Archivo Black';
     font-size: var(--fs-40);
@@ -111,6 +117,11 @@
     border: none;
     height: 1px;
     border-bottom: 1px solid var(--f-border-gray);
+  }
+
+  .overflow-scroll {
+    overflow-x: scroll;
+    scrollbar-width: none;
   }
 
 }
@@ -326,7 +337,6 @@
 
   .menu__dashboard {
     grid-column: 2;
-    overflow-x: scroll;
     overflow-y: hidden;
     scrollbar-width: none;
     height: calc(100vh - 100px);
@@ -356,6 +366,15 @@
     font-size: var(--fs-15);
     border-radius: 8px;
     margin-block: 10px;
+  }
+
+  .total-users {
+    color: var(--c-table-gray);
+  }
+
+  .users__statistics {
+    display: grid;
+    gap: .5rem;
   }
 }
 

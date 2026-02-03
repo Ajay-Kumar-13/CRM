@@ -135,7 +135,10 @@ function Dashboard() {
                     </div>
                     <div className="menu__dashboard">
                         <div className="dashboard__header">
-                            <h2>User Management</h2>
+                            <div className="users__statistics">
+                                <h2>User Management</h2>
+                                <h3 className="total-users">Total Users: {1}</h3>
+                            </div>
                             <button className="create__entity">
                                 Create User
                             </button>
@@ -144,7 +147,9 @@ function Dashboard() {
                         <div className="search">
                             <input placeholder="Search Users" />
                         </div>
-                        {mock_Data && <Table data={mock_Data} />}
+                        <div className="overflow-scroll">
+                            {mock_Data && <Table data={mock_Data} />}
+                        </div>
                     </div>
                 </div>
             </div>
