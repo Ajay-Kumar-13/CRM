@@ -143,7 +143,7 @@ function Dashboard() {
                                 Create User
                             </button>
                         </div>
-                        <hr class="bg-color-hr"></hr>
+                        <hr className="bg-color-hr"></hr>
                         <div className="search">
                             <input placeholder="Search Users" />
                         </div>
