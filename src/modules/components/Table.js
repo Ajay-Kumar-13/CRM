@@ -1,7 +1,20 @@
 import {getCoreRowModel, useReactTable, flexRender} from "@tanstack/react-table";
-import { getValue } from "@testing-library/user-event/dist/utils";
+import { useState } from "react";
 
 function Table({data}) {
+    const [isModalOpen, updateModalStatus] = useState(false);
+    const [selectedRow, setSelectedRow] = useState(null);
+
+    const setModal = (selectedRow) => {
+        updateModalStatus(true);
+        setSelectedRow(selectedRow);
+    }
+
+    const closeModal = () => {
+        updateModalStatus(false);
+        setSelectedRow(null);
+    }
+
     const columns = [
         {
             id: "select",
@@ -57,9 +70,9 @@ function Table({data}) {
         {
             id: "actions",
             header: "Actions",
-            cell: () => (
+            cell: ({row}) => (
                 <div className="actions">
-                    <button className="editButton name">Edit</button>
+                    <button className="editButton name" onClick={() => setModal(row.original)}>Edit</button>
                 </div>
             )
         }
@@ -68,42 +81,68 @@ function Table({data}) {
     const table = useReactTable({data, columns, getCoreRowModel: getCoreRowModel()});
 
     return (
-        <table className="users-table">
-            <thead>
-                {
-                    table.getHeaderGroups().map(hg => (
-                        <tr key={hg.id}>
-                            {
-                                hg.headers.map(header => (
-                                    <th key={header.id}>
-                                        {
-                                            flexRender(header.column.columnDef.header, header.getContext())
-                                        }
-                                    </th>
-                                ))
-                            }
-                        </tr>
-                    ))
-                }
-            </thead>
-            <tbody>
-                {
-                    table.getRowModel().rows.map(row => (
-                        <tr>
-                            {
-                                row.getVisibleCells().map(cell => (
-                                    <td>
-                                        {
-                                            flexRender(cell.column.columnDef.cell, cell.getContext())
-                                        }
-                                    </td>
-                                ))
-                            }
-                        </tr>
-                    ))
-                }
-            </tbody>
-        </table>
+        <div>
+            {
+                isModalOpen && isModalOpen && 
+                    <div className="modal-overlay" onClick={closeModal}>
+                        <div className="modal" onClick={(e) => e.stopPropagation()}>
+                            <div className="modal__header">
+                                <h2>Edit Profile</h2>
+                            </div>
+                            <div className="modal__header-body">
+                                <div className="user__details">
+                                    <div className="profile-pic">
+                                        <img src="/images/Rukmini Maharani.jpeg" />
+                                    </div>
+                                    <div className="profile-content">
+                                        <h2>Rukmini</h2>
+                                        <p className="email">rukmini@gmail.com</p>
+                                    </div>
+                                </div>
+                                <div className="danzer-zone">
+                                    <button className="red__outline-btn">De-Activate</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            }
+            <table className="users-table">
+                <thead>
+                    {
+                        table.getHeaderGroups().map(hg => (
+                            <tr key={hg.id}>
+                                {
+                                    hg.headers.map(header => (
+                                        <th key={header.id}>
+                                            {
+                                                flexRender(header.column.columnDef.header, header.getContext())
+                                            }
+                                        </th>
+                                    ))
+                                }
+                            </tr>
+                        ))
+                    }
+                </thead>
+                <tbody>
+                    {
+                        table.getRowModel().rows.map(row => (
+                            <tr>
+                                {
+                                    row.getVisibleCells().map(cell => (
+                                        <td>
+                                            {
+                                                flexRender(cell.column.columnDef.cell, cell.getContext())
+                                            }
+                                        </td>
+                                    ))
+                                }
+                            </tr>
+                        ))
+                    }
+                </tbody>
+            </table>
+        </div>
     )
 }
 

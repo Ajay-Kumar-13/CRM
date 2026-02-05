@@ -40,6 +40,16 @@
     font-size: var(--fs-18);
   }
 
+  h3 {
+    font-family: 'Rubik';
+    font-size: var(--fs-15);
+    margin: 0;
+  }
+
+  p {
+    margin: 0;
+  }
+
   h1 {
     font-family: 'Archivo Black';
     font-size: var(--fs-40);
@@ -111,6 +121,11 @@
     border: none;
     height: 1px;
     border-bottom: 1px solid var(--f-border-gray);
+  }
+
+  .overflow-scroll {
+    overflow-x: scroll;
+    scrollbar-width: none;
   }
 
 }
@@ -326,7 +341,6 @@
 
   .menu__dashboard {
     grid-column: 2;
-    overflow-x: scroll;
     overflow-y: hidden;
     scrollbar-width: none;
     height: calc(100vh - 100px);
@@ -356,6 +370,15 @@
     font-size: var(--fs-15);
     border-radius: 8px;
     margin-block: 10px;
+  }
+
+  .total-users {
+    color: var(--c-table-gray);
+  }
+
+  .users__statistics {
+    display: grid;
+    gap: .5rem;
   }
 }
 
@@ -489,3 +512,95 @@
     z-index: 2;
   }
 }
+
+@layer modal {
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr calc(100% - 52px) 1fr;
+    justify-content: center;
+  }
+
+  .modal {
+    background: white;
+    overflow: hidden;
+    border-radius: 8px;
+    grid-column: 2;
+    max-width: 800px;
+    margin: auto;
+    width: 100%;
+  }
+
+}
+
+@layer edit-profile {
+  .modal__header-body{
+    display: grid;
+    align-items: end;
+    padding: 0 3rem 2rem;
+
+    @media (width < calc(500 / 16 * 1rem)) {
+      padding: 0 1rem 1rem;
+    }
+  }
+
+  .modal__header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--f-blue);
+    color: var(--f-white);
+    padding: 7%;
+
+    @media (width < calc(600 / 14 * 1rem)) {
+      padding: 6%;
+    }
+  }
+
+  .modal h2 {
+    font-size: var(--fs-30);
+  }
+
+  .red__outline-btn {
+    padding: 0.6em 1.2em;
+    background-color: transparent;
+    border: 1px solid red;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: red;
+    font-weight: bolder;
+    color: white;
+    font-size: var(--fs-18);
+    width: fit-content;
+    white-space: nowrap;
+  }
+
+  .user__details {
+    grid-column: 1;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .danzer-zone {
+    grid-column: 2;
+    width: fit-content;
+    justify-self: end;
+  }
+
+  .profile-pic {
+    width: clamp(6rem, 13vw, 15rem);
+    aspect-ratio: 1;
+    transform: translateY(-50%); 
+    margin-bottom: clamp(-10rem, -5vw, -4rem);
+  }
+
+  .profile-pic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+} 
