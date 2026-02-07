@@ -92,7 +92,7 @@ function EditProfile(props) {
                 </div>
                 <hr></hr>
                 <div className="modal__footer">
-                    <button >
+                    <button onClick={props.closeModal}>
                         Cancel
                     </button>
                     <button className="background-blue save__changes">

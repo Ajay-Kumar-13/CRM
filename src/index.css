@@ -136,6 +136,12 @@
     scrollbar-width: none;
   }
 
+  .checkbox_div {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+  }
+
 }
 
 @layer colors {
@@ -149,6 +155,7 @@
     --f-gray: hsl(0, 0%, 50%);
     --c-table-gray: hsl(220, 9%, 46%);
     --c-success-badge: hsl(121, 71%, 47%);
+    --c-input-gray: hsla(0, 0%, 50%, 0.059);
   }
 }
 
@@ -543,6 +550,41 @@
     width: 100%;
   }
 
+  .modal__body input[type=text], input[type=email], input[type=password] {
+    border: 1px solid var(--f-border-gray);
+    background: var(--c-input-gray);
+    padding: .8rem;
+    font-size: var(--fs-18);
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .modal__body label{
+    display: block;
+    font-size: var(--fs-18);
+    margin-bottom: 1%;
+    font-weight: 400;
+  }
+
+  .create_user .modal__body {
+    display: grid;
+    padding: 2rem;
+    gap: 1.5rem;
+  }
+
+  .create_user .modal__header {
+    padding: 3%;
+  }
+
+  .create_user .modal__header h2{
+    font-weight: 400;
+  }
+
+  .modal__body.justify-items-vertically {
+    grid-template-columns: 1fr;
+  }
+
   .modal__footer {
     padding: 1rem 3rem 1rem;
     display: grid;
@@ -558,7 +600,7 @@
     width: fit-content;
     grid-row: 1;
     font-size: var(--fs-18);
-    padding: .5rem;
+    padding: .5rem 1rem;
     border-radius: 10px;
     font-weight: bold;
     border: none;
@@ -736,6 +778,7 @@
     display: grid;
     overflow-y: scroll;
     gap: 1rem;
+    scrollbar-width: none;
   }
 
   .update__authority {
@@ -818,5 +861,86 @@
 
   .slider.round:before {
     border-radius: 50%;
+  }
+}
+
+@layer create-user {
+  .user__name {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+  }
+
+  .user__name {
+    > * {
+      width: 50%;
+    }
+  }
+
+  .first_name, .last_name {
+    width: 100%;
+  }
+
+  .select__role {
+    width: 100%;
+    padding: .8rem;
+    font-size: var(--fs-18);
+    border: none;
+    border-bottom: 1px solid var(--f-border-gray);
+    background: transparent;
+  }
+
+  .select__role:focus {
+    outline: none;
+  }
+
+  .create_user > .modal > .modal__body > .authorities{
+    display: flex;
+    flex-direction: column;
+    grid-column: 1;
+    max-width: 100%;
+    overflow-x: scroll;
+    scrollbar-width: none;
+  }
+
+  .create_user > .modal > .modal__body > .authorities > .update__authorities{
+    display: flex;
+    flex-direction: row;
+  }
+
+  .create_user h2 {
+    font-weight: 400;
+    font-size: var(--fs-18);
+  }
+
+  .create_user h3 {
+    font-weight: 400;
+    font-size: var(--fs-15);
+  }
+
+  .create_user .switch {
+    width: 55px;
+    height: 30px;
+  }
+
+  .create_user .slider:before {
+    height: 22px;
+    width: 22px;
+  }
+
+  .create_user .security__settings{
+    background-color: var(--c-input-gray);
+    padding: 1rem;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 0px 5px var(--f-border-gray);
+    gap: 1rem;
+  }
+
+  .create_user .security__settings .password__management {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
 }

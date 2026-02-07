@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import Table from "./Table";
 import { useUsers } from "../../hooks/useUsers";
+import CreateUserModal from "./CreateUserModal";
 
 function Dashboard() {
 
     const [users, setUsers] = useState([]);
     const [sideBarToogle, setSideBarToogle] = useState(false);
+    const [isCreateUserModalOpen, toogleCreateUserModal] = useState(false);
 
     const {data: users_data} = useUsers();
 
@@ -29,6 +31,14 @@ function Dashboard() {
         if(!media.matches) {
             updateSideBar();
         }
+    }
+
+    const createUser = () => {
+        toogleCreateUserModal(true);
+    }
+
+    const closeCreateUserModal = () => {
+        toogleCreateUserModal(false);
     }
 
     media.addEventListener("change", handleSideBarToogle);
@@ -59,6 +69,9 @@ function Dashboard() {
 
     return (
         <div className="background-gray">
+            {
+                isCreateUserModalOpen && <CreateUserModal closeModal={closeCreateUserModal}/>
+            }
             <div className="wrapper">
                 <div className={`dashboard`}>
                     <button className="sidebar_toggle" id="sideBarToogle" onClick={updateSidebarToogle} aria-expanded="false">
@@ -80,7 +93,7 @@ function Dashboard() {
                                 <h2>User Management</h2>
                                 <h3 className="total-users">Total Users: {1}</h3>
                             </div>
-                            <button className="create__entity">
+                            <button className="create__entity" onClick={() => createUser()}>
                                 Create User
                             </button>
                         </div>
