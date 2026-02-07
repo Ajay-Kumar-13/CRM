@@ -1,6 +1,27 @@
-import React from "react";
+import { useEffect, useState } from "react";
+import { useAuthorities } from "../../hooks/useAuthorities";
+import { useRoles } from "../../hooks/useRoles";
 
 function EditProfile(props) {
+
+    const {data: authorities} = useAuthorities();
+    const {data: roles} = useRoles();
+    const user = props.data;
+
+    console.log("Editing user",user);
+    console.log("Fetched Authorities", authorities);
+    console.log("Fetched Roles", roles);
+
+    const haveAuthoritiy = (authority) => {
+        const auth = props.data.authorities.filter(permission => permission.name === authority);
+        if(auth) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    
     return (
         <div className="modal-overlay" onClick={props.closeModal}>
             <div className="modal" onClick={(e) => e.stopPropagation()}>
@@ -13,7 +34,7 @@ function EditProfile(props) {
                             <img src="/images/Rukmini Maharani.jpeg" />
                         </div>
                         <div className="profile-content">
-                            <h2>Rukmini</h2>
+                            <h2>{user.username}</h2>
                             <p className="email">rukmini@gmail.com</p>
                         </div>
                     </div>
@@ -43,42 +64,27 @@ function EditProfile(props) {
                             <div className="update-permission__section">
                                 <h3>Update Role</h3>
                                 <select>
-                                    <option>Admin</option>
-                                    <option>User</option>
-                                    <option>Manager</option>
+                                    {
+                                        roles && roles.map(role => 
+                                            <option>{role.roleName}</option>
+                                        )
+                                    }
                                 </select>
                             </div>
                             <div className="update-permission__section">
                                 <h3>Authorities</h3>
                                 <div className="update__authorities">
-                                    <div className="update__authority">
-                                        <label class="switch">
-                                            <input type="checkbox" />
-                                            <span class="slider round"></span>
-                                        </label>
-                                        <h3>CREATE</h3>
-                                    </div>
-                                    <div className="update__authority">
-                                        <label class="switch">
-                                            <input type="checkbox" />
-                                            <span class="slider round"></span>
-                                        </label>
-                                        <h3>READ</h3>
-                                    </div>
-                                    <div className="update__authority">
-                                        <label class="switch">
-                                            <input type="checkbox" />
-                                            <span class="slider round"></span>
-                                        </label>
-                                        <h3>UPDATE</h3>
-                                    </div>
-                                    <div className="update__authority">
-                                        <label class="switch">
-                                            <input type="checkbox" />
-                                            <span class="slider round"></span>
-                                        </label>
-                                        <h3>DELETE</h3>
-                                    </div>
+                                    {
+                                        authorities && authorities.map(authority => 
+                                            <div className="update__authority">
+                                                <label class="switch">
+                                                    <input type="checkbox" checked={haveAuthoritiy(authority.authorityName)}/>
+                                                    <span class="slider round"></span>
+                                                </label>
+                                                <h3>{authority.authorityName}</h3>
+                                            </div>
+                                        )
+                                    }
                                 </div>
                             </div>
                         </div>

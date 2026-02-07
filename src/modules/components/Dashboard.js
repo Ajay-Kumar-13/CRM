@@ -42,18 +42,18 @@ function Dashboard() {
     console.log("Fetched Users", users_data);
     
     const mock_Data = [
-    {
-        id: "86521719-1aa5-499d-aa02-daaecbb07986",
-        username: "superuser",
-        role: {
-        id: "df02ec18-01a7-4cd9-aefb-da90bbf544df",
-        name: "ADMIN"
-        },
-        authorities: [
-        { id: "26b8fee6-2bb6-4dd5-8775-2370bdef63f5", name: "CREATE" },
-        { id: "39290a88-0d6f-416f-9297-a7fc00ee74b0", name: "READ" }
-        ]
-    }
+        {
+            id: "86521719-1aa5-499d-aa02-daaecbb07986",
+            username: "superuser",
+            role: {
+            id: "df02ec18-01a7-4cd9-aefb-da90bbf544df",
+            name: "ADMIN"
+            },
+            authorities: [
+            { id: "26b8fee6-2bb6-4dd5-8775-2370bdef63f5", name: "CREATE" },
+            { id: "39290a88-0d6f-416f-9297-a7fc00ee74b0", name: "READ" }
+            ]
+        }
     ];
 
 
@@ -89,7 +89,7 @@ function Dashboard() {
                             <input placeholder="Search Users" />
                         </div>
                         <div className="overflow-scroll">
-                            {users_data && <Table data={mock_Data} />}
+                            {mock_Data && <Table data={mock_Data} />}
                         </div>
                     </div>
                 </div>

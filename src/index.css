@@ -732,7 +732,9 @@
   }
 
   .update__authorities {
+    max-height: 200px;
     display: grid;
+    overflow-y: scroll;
     gap: 1rem;
   }
 
@@ -803,6 +805,10 @@
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);
+
+    @media (width < calc(600 / 16 * 1rem)) {
+      transform: translateX(18px);
+    }
   }
 
   /* Rounded sliders */

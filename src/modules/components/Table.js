@@ -84,7 +84,7 @@ function Table({data}) {
     return (
         <div>
             {
-                isModalOpen && <EditProfile closeModal={closeModal}/>
+                isModalOpen && <EditProfile data={selectedRow} closeModal={closeModal}/>
             }
             <table className="users-table">
                 <thead>
