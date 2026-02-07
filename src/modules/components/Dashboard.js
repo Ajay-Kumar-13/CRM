@@ -1,17 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
-import { CRM_USERS_ENDPOINT, ACCESS_TOKEN } from "../../constants";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Table from "./Table";
+import { useUsers } from "../../hooks/useUsers";
 
 function Dashboard() {
 
     const [users, setUsers] = useState([]);
-    const [roles, setRoles] = useState([]);
-    const [authorities, setAuthorities] = useState([]);
     const [sideBarToogle, setSideBarToogle] = useState(false);
 
-    const navigate = useNavigate();
+    const {data: users_data} = useUsers();
 
     const media = window.matchMedia("(width < calc(1000 / 16 * 1rem))");
 
@@ -37,68 +33,13 @@ function Dashboard() {
 
     media.addEventListener("change", handleSideBarToogle);
 
-    const {
-        isPending: usersPending,
-        error: usersError,
-        data: users_data
-    } = useQuery({
-        queryKey: ["users"],
-        queryFn: () =>
-            fetch(`${CRM_USERS_ENDPOINT}/admin/users`, {
-                headers: {
-                    Authorization: `Bearer ${ACCESS_TOKEN}`
-                }
-            }).then(res => res.json())
-    });
-
-    const {
-        isPending: rolesPending,
-        error: rolesError,
-        data: roles_data
-    } = useQuery({
-        queryKey: ["roles"],
-        queryFn: () =>
-            fetch(`${CRM_USERS_ENDPOINT}/admin/roles`, {
-                headers: {
-                    Authorization: `Bearer ${ACCESS_TOKEN}`
-                }
-            }).then(res => res.json())
-    });
-
-        const {
-        isPending: authoritiesPending,
-        error: authoritiesError,
-        data: authorities_data
-    } = useQuery({
-        queryKey: ["authorities"],
-        queryFn: () =>
-            fetch(`${CRM_USERS_ENDPOINT}/admin/authorities`, {
-                headers: {
-                    Authorization: `Bearer ${ACCESS_TOKEN}`
-                }
-            }).then(res => res.json())
-    });
-
-    const handleUsers = () => {
-        navigate("/users")
-    }
-
     useEffect(() => {
         if (users_data) {
             setUsers(users_data);
         }
-
-        if(roles_data) {
-            setRoles(roles_data);
-        }
-        if(authorities_data) {
-            setAuthorities(authorities_data);
-        }
-    }, [users_data, roles_data, authorities_data]);
+    }, [users_data]);
     
     console.log("Fetched Users", users_data);
-    console.log("Fetched Roles", roles_data);
-    console.log("Fetched Authorities", authorities_data);
     
     const mock_Data = [
     {
@@ -148,7 +89,7 @@ function Dashboard() {
                             <input placeholder="Search Users" />
                         </div>
                         <div className="overflow-scroll">
-                            {mock_Data && <Table data={mock_Data} />}
+                            {users_data && <Table data={mock_Data} />}
                         </div>
                     </div>
                 </div>
