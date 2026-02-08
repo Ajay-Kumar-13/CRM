@@ -1,5 +1,6 @@
 import {getCoreRowModel, useReactTable, flexRender} from "@tanstack/react-table";
 import { useState } from "react";
+import EditProfile from "./EditProfile";
 
 function Table({data}) {
     const [isModalOpen, updateModalStatus] = useState(false);
@@ -83,28 +84,7 @@ function Table({data}) {
     return (
         <div>
             {
-                isModalOpen && isModalOpen && 
-                    <div className="modal-overlay" onClick={closeModal}>
-                        <div className="modal" onClick={(e) => e.stopPropagation()}>
-                            <div className="modal__header">
-                                <h2>Edit Profile</h2>
-                            </div>
-                            <div className="modal__header-body">
-                                <div className="user__details">
-                                    <div className="profile-pic">
-                                        <img src="/images/Rukmini Maharani.jpeg" />
-                                    </div>
-                                    <div className="profile-content">
-                                        <h2>Rukmini</h2>
-                                        <p className="email">rukmini@gmail.com</p>
-                                    </div>
-                                </div>
-                                <div className="danzer-zone">
-                                    <button className="red__outline-btn">De-Activate</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                isModalOpen && <EditProfile data={selectedRow} closeModal={closeModal}/>
             }
             <table className="users-table">
                 <thead>

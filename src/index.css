@@ -19,8 +19,10 @@
 
   :root {
     --fs-10: calc(10 / 16 * 1rem);
+    --fs-12: calc(12 / 16 * 1rem);
     --fs-15: calc(15 / 16 * 1rem);
     --fs-18: calc(18 / 16 * 1rem);
+    --fs-25: calc(25 / 16 * 1rem);
     --fs-30: calc(30 / 16 * 1rem);
     --fs-40: calc(40 / 16 * 1rem);
     --fs-54: calc(54 / 16 * 1rem);
@@ -117,15 +119,28 @@
     }
   }
 
+  hr {
+    margin: 0;
+    border: none;
+    border-bottom: 1px solid var(--f-border-gray);
+  }
+
   hr.bg-color-hr {
     border: none;
     height: 1px;
     border-bottom: 1px solid var(--f-border-gray);
+    margin: 5px 0;
   }
 
   .overflow-scroll {
     overflow-x: scroll;
     scrollbar-width: none;
+  }
+
+  .checkbox_div {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
   }
 
 }
@@ -140,6 +155,8 @@
     --f-border-gray: hsl(0, 0%, 82%);
     --f-gray: hsl(0, 0%, 50%);
     --c-table-gray: hsl(220, 9%, 46%);
+    --c-success-badge: hsl(121, 71%, 47%);
+    --c-input-gray: hsla(0, 0%, 50%, 0.059);
   }
 }
 
@@ -534,13 +551,86 @@
     width: 100%;
   }
 
-}
+  .modal__body input[type=text], input[type=email], input[type=password] {
+    border: 1px solid var(--f-border-gray);
+    background: var(--c-input-gray);
+    padding: .8rem;
+    font-size: var(--fs-18);
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
 
-@layer edit-profile {
+    @media (width < calc(600 / 16 * 1rem)) {
+      font-size: var(--fs-15);
+      padding: .5rem;
+    }
+  }
+
+  .modal__body label{
+    display: block;
+    font-size: var(--fs-18);
+    margin-bottom: 1%;
+    font-weight: 400;
+
+    @media (width < calc(600 / 16 * 1rem)) {
+      font-size: var(--fs-15);
+    }
+  }
+
+  .create_user .modal__body {
+    display: grid;
+    padding: 2rem;
+    gap: 1.5rem;
+
+    @media (width < calc(600 / 16 * 1rem)) {
+      padding: 1rem;
+      gap: 1rem;
+    }
+  }
+
+  .create_user .modal__header {
+    padding: 3%;
+  }
+
+  .create_user .modal__header h2{
+    font-weight: 400;
+  }
+
+  .modal__body.justify-items-vertically {
+    grid-template-columns: 1fr;
+  }
+
+  .modal__footer {
+    padding: 1rem 3rem 1rem;
+    display: grid;
+    justify-content: end;
+    gap: 2rem;
+
+    @media (width < calc(500 / 16 * 1rem)) {
+      padding: 1rem;
+      gap: 1rem;
+    }
+  }
+
+  .modal__footer button {
+    width: fit-content;
+    grid-row: 1;
+    font-size: var(--fs-18);
+    padding: .5rem 1rem;
+    border-radius: 10px;
+    font-weight: bold;
+    border: none;
+    box-shadow: 0px 0px 5px var(--f-border-gray);
+    cursor: pointer;
+
+    @media (width < calc(600 / 16 * 1rem)) {
+      font-size: var(--fs-15);
+    }
+  }
   .modal__header-body{
     display: grid;
     align-items: end;
-    padding: 0 3rem 2rem;
+    padding: 0 3rem 1rem;
 
     @media (width < calc(500 / 16 * 1rem)) {
       padding: 0 1rem 1rem;
@@ -562,7 +652,31 @@
 
   .modal h2 {
     font-size: var(--fs-30);
+    @media (width < calc(600 / 16 * 1rem)) {
+      font-size: var(--fs-18);
+    }
   }
+
+  .modal h3 {
+    font-size: var(--fs-18);
+    @media (width < calc(600 / 16 * 1rem)) {
+      font-size: var(--fs-15);
+    }
+  }
+
+  .modal__body{
+    padding: 1rem 3rem 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    @media (width < calc(500 / 16 * 1rem)) {
+      padding: 1rem;
+    }
+  }
+
+}
+
+@layer edit-profile { 
 
   .red__outline-btn {
     padding: 0.6em 1.2em;
@@ -576,6 +690,9 @@
     font-size: var(--fs-18);
     width: fit-content;
     white-space: nowrap;
+    @media (width < calc(600 / 16 * 1rem)) {
+      font-size: var(--fs-15);
+    }
   }
 
   .user__details {
@@ -603,4 +720,270 @@
     object-fit: cover;
     border-radius: 50%;
   }
+
+  .account__details {
+    grid-column: 1;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .user__permissions {
+    grid-column: 2;
+  }
+
+  .badge {
+    margin-block: 10px;
+    background-color: var(--c-success-badge);
+    color: var(--f-white);
+    width: fit-content;
+    padding: .5rem;
+    font-weight: bold;
+    border-radius: 12px;
+    font-size: var(--fs-18);
+    @media (width < calc(600 / 16 * 1rem)) {
+      font-size: var(--fs-15);
+    }
+  }
+
+  .user__permissions{
+    display: grid;
+    gap: 1rem;
+  }
+
+  .user__permissions h2 {
+    color: var(--f-gray);
+    font-size: var(--fs-25);
+
+    @media (width < calc(600 / 16 * 1rem)) {
+      font-size: var(--fs-18);
+    }
+  }
+
+  .user__permissions > .controls{
+    margin-left: 20px;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .user__permissions select {
+    padding: .5rem;
+    border: none;
+    background-color: transparent;
+    border-bottom: 1px solid var(--f-border-gray);
+    font-size: var(--fs-18);
+    @media (width < calc(600 / 16 * 1rem)) {
+      font-size: var(--fs-15);
+    }
+  }
+
+  .user__permissions select:focus {
+    outline: none;
+  }
+
+  .update-permission__section {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .save__changes {
+    color: white;    
+  }
+
+  .update__authorities {
+    max-height: 200px;
+    display: grid;
+    overflow-y: scroll;
+    gap: 1rem;
+    scrollbar-width: none;
+  }
+
+  .update__authority {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+  }
 } 
+
+@layer switch {
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+
+    @media (width < calc(600 / 16 * 1rem)) {
+      height: 24px;
+      width: 45px;
+    }
+  }
+
+  .switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+
+    @media (width < calc(600 / 16 * 1rem)) {
+      height: 16px;
+      width: 18px;
+    }
+  }
+
+  input:checked + .slider {
+    background-color: #2196F3;
+  }
+
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+
+    @media (width < calc(600 / 16 * 1rem)) {
+      transform: translateX(18px);
+    }
+  }
+
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+
+  .slider.round:before {
+    border-radius: 50%;
+  }
+}
+
+@layer create-user {
+  .user__name {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+  }
+
+  .user__name {
+    > * {
+      width: 50%;
+    }
+  }
+
+  .first_name, .last_name {
+    width: 100%;
+  }
+
+  .select__role {
+    width: 100%;
+    padding: .8rem;
+    font-size: var(--fs-18);
+    border: none;
+    border-bottom: 1px solid var(--f-border-gray);
+    background: transparent;
+    @media (width < calc(600 / 16 * 1rem)) {
+      font-size: var(--fs-15);
+      padding: .5rem;
+    }
+  }
+
+  .select__role:focus {
+    outline: none;
+  }
+
+  .create_user > .modal > .modal__body > .authorities{
+    display: flex;
+    flex-direction: column;
+    grid-column: 1;
+    max-width: 100%;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    @media (width < calc(600 / 16 * 1rem)) {
+      gap: .5rem;
+    }
+  }
+
+  .create_user > .modal > .modal__body > .authorities > .update__authorities{
+    display: flex;
+    flex-direction: row;
+  }
+
+  .create_user h2 {
+    font-weight: 400;
+    font-size: var(--fs-18);
+    @media (width < calc(600 / 16 * 1rem)) {
+      font-size: var(--fs-15);
+    }
+  }
+
+  .create_user h3 {
+    font-weight: 400;
+    font-size: var(--fs-15);
+    @media (width < calc(600 / 16 * 1rem)) {
+      font-size: var(--fs-12);
+    }
+  }
+
+  .create_user .switch {
+    width: 55px;
+    height: 30px;
+
+    @media (width < calc(600 / 16 * 1rem)) {
+      width: 46px;
+      height: 26px;
+    }
+  }
+
+  .create_user .slider:before {
+    height: 22px;
+    width: 22px;
+
+    @media (width < calc(600 / 16 * 1rem)) {
+      height: 18px;
+      width: 18px;
+    }
+  }
+
+  .create_user .security__settings{
+    background-color: var(--c-input-gray);
+    padding: 1rem;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 0px 5px var(--f-border-gray);
+    gap: 1rem;
+  }
+
+  .create_user .security__settings .password__management {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .create_user > .modal > .modal__body > .authorities > .update__authorities > .update__authority{
+    gap: .3rem;
+  }
+}
