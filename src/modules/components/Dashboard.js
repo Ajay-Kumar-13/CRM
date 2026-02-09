@@ -2,12 +2,21 @@ import { useEffect, useState } from "react";
 import Table from "./Table";
 import { useUsers } from "../../hooks/useUsers";
 import CreateUserModal from "./CreateUserModal";
+import { useQueryClient } from "@tanstack/react-query";
+import { fetchRoles } from "../../services/fetchRoles";
+import { fetchAuthorities } from "../../services/fetchAuthorities";
 
 function Dashboard() {
 
-    const [users, setUsers] = useState([]);
     const [sideBarToogle, setSideBarToogle] = useState(false);
     const [isCreateUserModalOpen, toogleCreateUserModal] = useState(false);
+    
+    const queryClient = useQueryClient();
+
+    useEffect(() => {
+        queryClient.prefetchQuery({queryKey: ['fetch_roles'], queryFn: fetchRoles});
+        queryClient.prefetchQuery({queryKey: ['fetch_authorities'], queryFn: fetchAuthorities});
+    }, [queryClient]);
 
     const {data: users_data} = useUsers();
 
@@ -42,12 +51,6 @@ function Dashboard() {
     }
 
     media.addEventListener("change", handleSideBarToogle);
-
-    useEffect(() => {
-        if (users_data) {
-            setUsers(users_data);
-        }
-    }, [users_data]);
     
     console.log("Fetched Users", users_data);
     
@@ -102,7 +105,7 @@ function Dashboard() {
                             <input placeholder="Search Users" />
                         </div>
                         <div className="overflow-scroll">
-                            {mock_Data && <Table data={mock_Data} />}
+                            {users_data && <Table data={users_data} />}
                         </div>
                     </div>
                 </div>

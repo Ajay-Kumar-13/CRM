@@ -1,4 +1,10 @@
+import { useAuthorities } from "../../hooks/useAuthorities";
+import { useRoles } from "../../hooks/useRoles";
+
 function CreateUserModal(props) {
+    const {data: roles_data} = useRoles();
+    const {data: authorities_data} = useAuthorities();
+
     return (
         <div className="modal-overlay create_user" onClick={props.closeModal}>
             <div className="modal" onClick={(e) => e.stopPropagation()}>
@@ -23,7 +29,11 @@ function CreateUserModal(props) {
                     <div className="user__role">
                         <label for="select__role">ORGANIZATION ROLE</label>
                         <select className="select__role" id="select__role">
-                            <option>ADMIN</option>
+                            {
+                                roles_data && roles_data.map(role => 
+                                    <option>{role.roleName}</option>
+                                )
+                            }
                         </select>
                     </div>
                     <div className="authorities">
@@ -31,62 +41,17 @@ function CreateUserModal(props) {
                             <h2>Authorities</h2>
                         </div>
                         <div className="update__authorities">  
-                            <div className="update__authority">
-                                <label class="switch">
-                                    <input type="checkbox"/>
-                                    <span class="slider round"></span>
-                                </label>
-                                <h3>CREATE</h3>
-                            </div>
-                            <div className="update__authority">
-                                <label class="switch">
-                                    <input type="checkbox"/>
-                                    <span class="slider round"></span>
-                                </label>
-                                <h3>READ</h3>
-                            </div>
-                            <div className="update__authority">
-                                <label class="switch">
-                                    <input type="checkbox"/>
-                                    <span class="slider round"></span>
-                                </label>
-                                <h3>UPDATE</h3>
-                            </div>
-                            <div className="update__authority">
-                                <label class="switch">
-                                    <input type="checkbox"/>
-                                    <span class="slider round"></span>
-                                </label>
-                                <h3>DELETE</h3>
-                            </div>
-                            <div className="update__authority">
-                                <label class="switch">
-                                    <input type="checkbox"/>
-                                    <span class="slider round"></span>
-                                </label>
-                                <h3>CREATE</h3>
-                            </div>
-                            <div className="update__authority">
-                                <label class="switch">
-                                    <input type="checkbox"/>
-                                    <span class="slider round"></span>
-                                </label>
-                                <h3>READ</h3>
-                            </div>
-                            <div className="update__authority">
-                                <label class="switch">
-                                    <input type="checkbox"/>
-                                    <span class="slider round"></span>
-                                </label>
-                                <h3>UPDATE</h3>
-                            </div>
-                            <div className="update__authority">
-                                <label class="switch">
-                                    <input type="checkbox"/>
-                                    <span class="slider round"></span>
-                                </label>
-                                <h3>DELETE</h3>
-                            </div>
+                            {
+                                authorities_data && authorities_data.map(authority => 
+                                    <div className="update__authority">
+                                        <label class="switch">
+                                            <input type="checkbox"/>
+                                            <span class="slider round"></span>
+                                        </label>
+                                        <h3>{authority.authorityName}</h3>
+                                    </div>
+                                )
+                            }
                         </div>
                     </div>
                     <div className="security__settings">

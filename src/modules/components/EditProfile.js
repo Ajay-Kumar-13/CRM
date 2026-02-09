@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useAuthorities } from "../../hooks/useAuthorities";
 import { useRoles } from "../../hooks/useRoles";
 
@@ -13,13 +12,10 @@ function EditProfile(props) {
     console.log("Fetched Roles", roles);
 
     const haveAuthoritiy = (authority) => {
-        const auth = props.data.authorities.filter(permission => permission.name === authority);
-        if(auth) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+        return props.data.authorities.some(
+            permission => permission.name === authority
+        );
+    };
     
     
     return (
