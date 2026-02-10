@@ -86,7 +86,7 @@ function Dashboard() {
                                 <li className="search"><input placeholder="Search" /></li>
                                 <li>Home</li>
                                 <li className="active">Users</li>
-                                <li>Roles & Authorities</li>
+                                <li>Roles</li>
                             </ul>
                         </div>
                     </div>
