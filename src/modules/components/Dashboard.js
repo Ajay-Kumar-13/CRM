@@ -53,7 +53,7 @@ function Dashboard() {
     media.addEventListener("change", handleSideBarToogle);
     
     console.log("Fetched Users", users_data);
-    
+
     const mock_Data = [
         {
             id: "86521719-1aa5-499d-aa02-daaecbb07986",
@@ -86,7 +86,7 @@ function Dashboard() {
                                 <li className="search"><input placeholder="Search" /></li>
                                 <li>Home</li>
                                 <li className="active">Users</li>
-                                <li>Roles & Authorities</li>
+                                <li>Roles</li>
                             </ul>
                         </div>
                     </div>
